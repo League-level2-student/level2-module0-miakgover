@@ -27,15 +27,17 @@ public class _01_RobotRace {
 		while(!won) {
 			for(int i=0;i<robots.length;i++) {
 				int distance = rand.nextInt(50);
-				if(robots[i].getY()>=250) {
-					robots[i].move(distance);
-					robots[i].setX(robots[i].getX()+distance);
+				robots[i].move(distance);
+				if(robots[i].getX()==(i*100+75)&&robots[i].getY()<=250) {
+					robots[i].setAngle(90);
 				}
-				else {
-					robots[i].move(-1*distance);
-					robots[i].setX(robots[i].getX()-distance);
+				else if(robots[i].getY()<=250 && robots[i].getX()>=i*100+600) {
+					robots[i].setAngle(180);
 				}
-				if(robots[i].getY()<=0) {
+				else if(robots[i].getX()>=i*100+600 && robots[i].getY()>=500) {
+					robots[i].setAngle(-90);
+				}
+				if(robots[i].getY()>=500 && robots[i].getX()<=i*100+75) {
 					winner = i;
 					won = true;
 					break;
